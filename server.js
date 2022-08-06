@@ -37,10 +37,14 @@ app.get('/testScraperOne', async(req, res) => {
     }
 })
 
-app.get('/testScraper', async (req, res) => {
+app.get('/testScraper/:world', async (req, res) => {
     try {
+        const world = req.params.world
         await deleteWorlds()
-        await testScraper(SERVERS)
+        const response = await testScraper(world) 
+        console.log(response)
+        const insertResponse = await insertWorld({ world, characters: response })
+        console.log(insertResponse)
         await calcStats() 
     } catch (err) {
         res.status(500).send(err)
