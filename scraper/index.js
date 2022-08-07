@@ -35,7 +35,7 @@ const scraper = async (worlds) => {
         const DATA = []
     
         // const page = await browser.newPage()
-        const page = await browser.pages()
+        const page = await browser.newPage()
     
         await page.setRequestInterception(true)
         page.on('request', (req) => {
@@ -117,7 +117,7 @@ const scraper = async (worlds) => {
         console.log(new Date(TOTAL_TIME).toISOString().slice(11, 19))
         
         console.log(`Czy udało się pobrać wszystkie dane: ${isDone}`)
-        insertWorld({ world, characters: DATA })
+        await insertWorld({ world, characters: DATA })
     }
     await browser.close()
 }
