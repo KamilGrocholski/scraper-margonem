@@ -27,7 +27,6 @@ app.get('/hello', async (req, res) => {
 
 app.get('/testScraperOne', async(req, res) => {
     try {
-        await deleteWorlds()
         const response = await testScraper('Tempest')
         console.log(response)
         const insertResponse = await insertWorld(response)
@@ -37,17 +36,13 @@ app.get('/testScraperOne', async(req, res) => {
     }
 })
 
-app.get('/testScraper/:world', async (req, res) => {
+app.get('/testScraper', async (req, res) => {
     try {
-        const world = req.params.world
-        await deleteWorlds()
-        const response = await testScraper(world) 
-        console.log(response)
-        const insertResponse = await insertWorld({ world, characters: response })
-        console.log(insertResponse)
+        await testScraper(SERVERS) 
         await calcStats() 
+        return res.status(201).json({ msg: 'Jest dobrze, dobrze robi, robi git.' })
     } catch (err) {
-        res.status(500).send(err)
+        return res.status(500).send(err)
     }
 })
 
