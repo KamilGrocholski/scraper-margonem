@@ -38,6 +38,7 @@ app.get('/testScraperOne', async(req, res) => {
 
 app.get('/testScraper', async (req, res) => {
     try {
+        await deleteWorlds()
         await testScraper(SERVERS) 
         await calcStats() 
         return res.status(201).json({ msg: 'Jest dobrze, dobrze robi, robi git.' })
