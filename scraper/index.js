@@ -1,5 +1,6 @@
 import puppeteer from 'puppeteer'
 import { insertWorld } from '../controllers/worldController.js'
+import calcStats from '../statistics/index.js'
 
 import { BASIC_URL } from './consts.js'
 const URL = BASIC_URL
@@ -109,13 +110,14 @@ const scraper = async (worlds) => {
         const END = new Date()
         console.log(`KONIEC: ${END}`)
         
-        const TOTAL_TIME = END - START
-        console.log(new Date(TOTAL_TIME).toISOString().slice(11, 19))
-        
         console.log(`Czy udało się pobrać wszystkie dane: ${isDone}`)
         await insertWorld({ world, DATA })
+
+        const TOTAL_TIME = END - START
+        console.log(new Date(TOTAL_TIME).toISOString().slice(11, 19))
     }
     await browser.close()
+    await calcStats()
 }
 
 export default scraper

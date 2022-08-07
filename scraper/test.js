@@ -1,5 +1,6 @@
 import puppeteer from 'puppeteer'
 import { deleteWorlds, insertWorld } from '../controllers/worldController.js'
+import calcStats from '../statistics/index.js'
 
 import { BASIC_URL } from './consts.js'
 const URL = BASIC_URL
@@ -130,6 +131,7 @@ const testScraper = async (worlds) => {
         console.log(`CZAS: ${new Date(TOTAL_TIME).toISOString().slice(11, 19)}`)
     }
     await browser.close()
+    await calcStats()
 }
 
 export default testScraper
