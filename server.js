@@ -24,7 +24,7 @@ app.get('/hello', async (req, res) => {
     return res.json('Hello')
 })
 
-app.get('/:p/testScraper', async (req, res) => {
+app.get('/:p/testScraper/:world', async (req, res) => {
     try {
         if (req.params.p !== process.env.P) return res.status(401).send('nieprawidłowe P')
         const world = req.params.world

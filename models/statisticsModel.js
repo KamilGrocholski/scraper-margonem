@@ -24,6 +24,12 @@ const statisticsTotalSchema = new mongoose.Schema({
             }
         }
     ],
+    nW: Number,
+    nM: Number,
+    nP: Number,
+    nH: Number,
+    nT: Number,
+    nBd: Number,
     creationTime: {
         required: true,
         type: Date,

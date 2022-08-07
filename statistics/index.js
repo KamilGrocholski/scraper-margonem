@@ -6,7 +6,13 @@ const calcStats = async () => {
         name: 'Wszystkie',
         nCharacters: 0,
         maxLvl: 0,
-        profsByLvl: []
+        profsByLvl: [],
+        'Wojownik': 0,
+        'Mag': 0,
+        'Paladyn': 0,
+        'Łowca': 0,
+        'Tropiciel': 0,
+        'Tancerz ostrzy': 0
     }
 
     for (let i = 0; i < 500; i++) {
@@ -45,7 +51,13 @@ const calcStats = async () => {
             name,
             nCharacters: 0,
             maxLvl: worldMaxLvl,
-            profsByLvl: []
+            profsByLvl: [],
+            'Wojownik': 0,
+            'Mag': 0,
+            'Paladyn': 0,
+            'Łowca': 0,
+            'Tropiciel': 0,
+            'Tancerz ostrzy': 0
         }
 
         for (let i = 0; i < worldMaxLvl; i++) {
@@ -65,16 +77,24 @@ const calcStats = async () => {
         worldData[0].characters.map(char => {
             worldStatistics.nCharacters++
             worldStatistics.profsByLvl[char.lvl - 1].profs[char.prof]++
+            worldStatistics[char.prof]++
             
             globalStatistics.nCharacters++
             globalStatistics.profsByLvl[char.lvl - 1].profs[char.prof]++
+            globalStatistics[char.prof]++
         })
 
         await Statistics.create({
             name,
             nCharacters: worldStatistics.nCharacters,
             maxLvl: worldStatistics.maxLvl,
-            profsByLvl: worldStatistics.profsByLvl
+            profsByLvl: worldStatistics.profsByLvl,
+            nW: worldStatistics['Wojownik'],
+            nM: worldStatistics['Mag'],
+            nP: worldStatistics['Paladyn'],
+            nH: worldStatistics['Łowca'],
+            nT: worldStatistics['Tropiciel'],
+            nBd: worldStatistics['Tancerz ostrzy']
         })
     }
 
@@ -89,7 +109,13 @@ const calcStats = async () => {
         name: globalStatistics.name,
         nCharacters: globalStatistics.nCharacters,
         maxLvl: globalStatistics.maxLvl,
-        profsByLvl: globalStatistics.profsByLvl
+        profsByLvl: globalStatistics.profsByLvl,
+        nW: globalStatistics['Wojownik'],
+        nM: globalStatistics['Mag'],
+        nP: globalStatistics['Paladyn'],
+        nH: globalStatistics['Łowca'],
+        nT: globalStatistics['Tropiciel'],
+        nBd: globalStatistics['Tancerz ostrzy']
     })
 
     console.log(globalInsert)
