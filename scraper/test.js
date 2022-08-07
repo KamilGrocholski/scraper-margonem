@@ -111,10 +111,9 @@ const testScraper = async (worlds) => {
             }
         
         
-        console.log('Zamykam przeglądarkę...')
-        await page.close()
-        await browser.close()
-    
+        // console.log('Zamykam przeglądarkę...')
+        // await page.close()
+        
         console.log(DATA)
         
         
@@ -123,13 +122,14 @@ const testScraper = async (worlds) => {
         
         console.log('Wkładam do bazy danych...')
         await insertWorld({ world, DATA })
-        
+
         const END = new Date()
         console.log(`KONIEC: ${END}`)
         
         const TOTAL_TIME = END - START
         console.log(`CZAS: ${new Date(TOTAL_TIME).toISOString().slice(11, 19)}`)
     }
+    await browser.close()
 }
 
 export default testScraper

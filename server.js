@@ -50,13 +50,9 @@ app.get('/testScraper', async (req, res) => {
 app.get('/scraper', async (req, res) => {
     try {
         await deleteWorlds()
-        await Promise.all(SERVERS.map(async world => {
-            const response = await scraper(world) 
-            console.log(response)
-            const insertResponse = await insertWorld({ world, characters: response })
-            console.log(insertResponse)
-        }))
+        await scraper(SERVERS) 
         await calcStats() 
+        return res.status(201).json({ msg: 'Jest dobrze, dobrze robi, robi git.' })
     } catch (err) {
         console.log(err)
         return res.status(500).send(err)
