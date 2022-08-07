@@ -7,7 +7,7 @@ const URL = BASIC_URL
 import { SERVERS } from './consts.js'
 import { SELECTORS } from './consts.js'
 
-const scraper = async (worlds) => {
+const scraper = async (world) => {
 
     const START = new Date()
     console.log(`START: ${START}`)
@@ -27,9 +27,6 @@ const scraper = async (worlds) => {
             '--disable-gpu'
         ]
     })
-
-    for (let i = 0; i < worlds.length; i++) {
-        const world = worlds[i]
         if (!SERVERS.some(s => s === world)) return 'Nieprawidowa nazwa świata.'
 
         const DATA = []
@@ -109,6 +106,7 @@ const scraper = async (worlds) => {
         
         console.log('Zamykam przeglądarkę...')
         await page.close()
+        await browser.close()
         
         const END = new Date()
         console.log(`KONIEC: ${END}`)
@@ -118,8 +116,6 @@ const scraper = async (worlds) => {
         
         console.log(`Czy udało się pobrać wszystkie dane: ${isDone}`)
         await insertWorld({ world, characters: DATA })
-    }
-    await browser.close()
 }
 
 export default scraper

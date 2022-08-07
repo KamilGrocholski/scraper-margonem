@@ -16,8 +16,7 @@ const worldSchema = new mongoose.Schema({
 		}
 	]
 }, { 
-	collection: 'Worlds',
-	timestamps: true
+	collection: 'Worlds'
 }
 )
 

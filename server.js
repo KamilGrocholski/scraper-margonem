@@ -25,33 +25,29 @@ app.get('/hello', async (req, res) => {
     return res.json('Hello')
 })
 
-app.get('/testScraperOne', async(req, res) => {
-    try {
-        const response = await testScraper('Tempest')
-        console.log(response)
-        const insertResponse = await insertWorld(response)
-        console.log(insertResponse)
-    } catch (err) {
-        console.log(err)
-    }
-})
-
 app.get('/testScraper', async (req, res) => {
     try {
-        await deleteWorlds()
-        await testScraper(SERVERS) 
-        await calcStats()
+        const world = req.params.world
+        await testScraper(world) 
         return res.status(201).send('Jest dobrze, dobrze robi, robi git.')
     } catch (err) {
         return res.status(500).send(err)
     }
 })
 
-app.get('/scraper', async (req, res) => {
+app.get('/deleteWorlds', async (req, res) => {
     try {
         await deleteWorlds()
-        await scraper(SERVERS) 
-        await calcStats()
+        return res.status(201).send('Usunięto pomyślnie.')
+    } catch (err) {
+        return res.status(500).send('Nie udało się usunąć!')
+    }
+})
+
+app.get('/scraper/:world', async (req, res) => {
+    try {
+        const world = req.params.world
+        await scraper(world) 
         return res.status(201).send('Jest dobrze, dobrze robi, robi git.')
     } catch (err) {
         console.log(err)

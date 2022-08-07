@@ -11,7 +11,7 @@ const TEST = {
     PAGINATION_LOOP: 1,
     ROWS_LOOP: 15,
 }
-const testScraper = async (worlds) => {
+const testScraper = async (world) => {
 
     const START = new Date()
     console.log(`START: ${START}`)
@@ -32,8 +32,6 @@ const testScraper = async (worlds) => {
         ],
     })
 
-    for (let i = 0; i < worlds.length; i++) {
-        const world = worlds[i]
         if (!SERVERS.some(s => s === world)) return 'Nieprawidowa nazwa świata.'
 
         const DATA = []
@@ -114,6 +112,7 @@ const testScraper = async (worlds) => {
         
         console.log('Zamykam przeglądarkę...')
         await page.close()
+        await browser.close()
         
         console.log(DATA)
         
@@ -128,8 +127,6 @@ const testScraper = async (worlds) => {
         
         console.log('Wkładam do bazy danych...')
         await insertWorld({ world, characters: DATA })
-    }
-    await browser.close()
 }
 
 export default testScraper
