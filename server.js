@@ -15,35 +15,18 @@ dotenv.config()
 
 const app = express()
 
-const whitelistIp = [ "198.27.83.222", "192.99.21.124", "167.114.64.88", "167.114.64.21" ]
-
-const corsOptionsDelegate = function (req, callback) {
-    const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-    
-    let corsOptions;
-    
-    if (whitelistIp.indexOf(ip) !== -1) {
-        corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
-    } else {
-        corsOptions = { origin: false } // disable CORS for this request
-    }
-    
-    callback(null, corsOptions) // callback expects two parameters: error and options
-}
-
-
 app.use(cors())
 app.use(express.json({limit: '50mb'}))
 app.use(express.urlencoded({ limit: '50mb', extended: true }))
-
 
 app.get('/hello', async (req, res) => {
     console.log('Hello')
     return res.json('Hello')
 })
 
-app.get('/testScraper', async (req, res) => {
+app.get('/:p/testScraper', async (req, res) => {
     try {
+        if (req.params.p !== process.env.P) return res.status(401).send('nieprawidłowe P')
         const world = req.params.world
         await testScraper(world) 
         return res.status(201).send('Jest dobrze, dobrze robi, robi git.')
@@ -52,8 +35,9 @@ app.get('/testScraper', async (req, res) => {
     }
 })
 
-app.get('/deleteWorlds', async (req, res) => {
+app.get('/:p/deleteWorlds', async (req, res) => {
     try {
+        if (req.params.p !== process.env.P) return res.status(401).send('nieprawidłowe P')
         await deleteWorlds()
         return res.status(201).send('Usunięto pomyślnie.')
     } catch (err) {
@@ -61,8 +45,9 @@ app.get('/deleteWorlds', async (req, res) => {
     }
 })
 
-app.get('/scraper/:world', async (req, res) => {
+app.get('/:p/scraper/:world', async (req, res) => {
     try {
+        if (req.params.p !== process.env.P) return res.status(401).send('nieprawidłowe P')
         const world = req.params.world
         await scraper(world) 
         return res.status(201).send('Jest dobrze, dobrze robi, robi git.')
@@ -72,8 +57,9 @@ app.get('/scraper/:world', async (req, res) => {
     }
 })
 
-app.get('/statistics/insert', async (req, res) => {
+app.get('/:p/statistics/insert', async (req, res) => {
     try {
+        if (req.params.p !== process.env.P) return res.status(401).send('nieprawidłowe P')
         const response = await calcStats()
         console.log(response)
         console.log('koniec-------------------------------------------------')
