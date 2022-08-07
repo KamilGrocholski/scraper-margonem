@@ -116,8 +116,8 @@ const scraper = async (worlds) => {
         const TOTAL_TIME = END - START
         console.log(new Date(TOTAL_TIME).toISOString().slice(11, 19))
     }
-    await browser.close()
     await calcStats()
+    await browser.close()
 }
 
 export default scraper

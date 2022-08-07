@@ -130,8 +130,8 @@ const testScraper = async (worlds) => {
         const TOTAL_TIME = END - START
         console.log(`CZAS: ${new Date(TOTAL_TIME).toISOString().slice(11, 19)}`)
     }
-    await browser.close()
     await calcStats()
+    await browser.close()
 }
 
 export default testScraper
