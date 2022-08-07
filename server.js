@@ -40,6 +40,7 @@ app.get('/testScraper', async (req, res) => {
     try {
         await deleteWorlds()
         await testScraper(SERVERS) 
+        await calcStats()
         return res.status(201).send('Jest dobrze, dobrze robi, robi git.')
     } catch (err) {
         return res.status(500).send(err)

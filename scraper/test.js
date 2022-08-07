@@ -38,7 +38,7 @@ const testScraper = async (worlds) => {
 
         const DATA = []
     
-        const [page] = await browser.newPage()
+        const page = await browser.newPage()
     
         await page.setRequestInterception(true)
         page.on('request', (req) => {
@@ -112,8 +112,8 @@ const testScraper = async (worlds) => {
             }
         
         
-        // console.log('Zamykam przeglądarkę...')
-        // await page.close()
+        console.log('Zamykam przeglądarkę...')
+        await page.close()
         
         console.log(DATA)
         
@@ -130,7 +130,6 @@ const testScraper = async (worlds) => {
         await insertWorld({ world, characters: DATA })
     }
     await browser.close()
-    await calcStats()
 }
 
 export default testScraper
