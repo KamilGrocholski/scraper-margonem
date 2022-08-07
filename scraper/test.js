@@ -1,5 +1,5 @@
 import puppeteer from 'puppeteer'
-import { deleteWorlds, insertWorld } from '../controllers/worldController.js'
+import { insertWorld } from '../controllers/worldController.js'
 import calcStats from '../statistics/index.js'
 
 import { BASIC_URL } from './consts.js'
@@ -15,7 +15,7 @@ const testScraper = async (worlds) => {
 
     const START = new Date()
     console.log(`START: ${START}`)
-
+    
     console.log('Otwieram przeglądarkę...')
     const browser = await puppeteer.launch({
         headless: true,
@@ -38,7 +38,7 @@ const testScraper = async (worlds) => {
 
         const DATA = []
     
-        const page = await browser.newPage()
+        const [page] = await browser.newPage()
     
         await page.setRequestInterception(true)
         page.on('request', (req) => {
@@ -118,20 +118,19 @@ const testScraper = async (worlds) => {
         console.log(DATA)
         
         
-        
-        console.log(`Czy udało się pobrać wszystko: ${isDone}`)
-        
-        console.log('Wkładam do bazy danych...')
-        await insertWorld({ world, DATA })
-
         const END = new Date()
         console.log(`KONIEC: ${END}`)
         
         const TOTAL_TIME = END - START
         console.log(`CZAS: ${new Date(TOTAL_TIME).toISOString().slice(11, 19)}`)
+        
+        console.log(`Czy udało się pobrać wszystko: ${isDone}`)
+        
+        console.log('Wkładam do bazy danych...')
+        await insertWorld({ world, characters: DATA })
     }
-    await calcStats()
     await browser.close()
+    await calcStats()
 }
 
 export default testScraper
