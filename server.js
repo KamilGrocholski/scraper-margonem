@@ -51,6 +51,7 @@ app.get('/scraper', async (req, res) => {
     try {
         await deleteWorlds()
         await scraper(SERVERS) 
+        await calcStats()
         return res.status(201).send('Jest dobrze, dobrze robi, robi git.')
     } catch (err) {
         console.log(err)
