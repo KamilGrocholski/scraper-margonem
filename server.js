@@ -15,6 +15,23 @@ dotenv.config()
 
 const app = express()
 
+const whitelistIp = [ "198.27.83.222", "192.99.21.124", "167.114.64.88", "167.114.64.21" ]
+
+const corsOptionsDelegate = function (req, callback) {
+    const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    
+    let corsOptions;
+    
+    if (whitelistIp.indexOf(ip) !== -1) {
+        corsOptions = { origin: true } // reflect (enable) the requested origin in the CORS response
+    } else {
+        corsOptions = { origin: false } // disable CORS for this request
+    }
+    
+    callback(null, corsOptions) // callback expects two parameters: error and options
+}
+
+
 app.use(cors())
 app.use(express.json({limit: '50mb'}))
 app.use(express.urlencoded({ limit: '50mb', extended: true }))
