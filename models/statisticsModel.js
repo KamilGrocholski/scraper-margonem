@@ -7,6 +7,12 @@ const statisticsTotalSchema = new mongoose.Schema({
         required: true
     },
     nCharacters: Number,
+    nW: Number,
+    nM: Number,
+    nP: Number,
+    nH: Number,
+    nT: Number,
+    nBd: Number,
     maxLvl: Number,
     profsByLvl: [
         {
@@ -24,16 +30,10 @@ const statisticsTotalSchema = new mongoose.Schema({
             }
         }
     ],
-    nW: Number,
-    nM: Number,
-    nP: Number,
-    nH: Number,
-    nT: Number,
-    nBd: Number,
     creationTime: {
-        required: true,
         type: Date,
-        default: (new Date()).toISOString().slice(0, 10)
+        default: (new Date()).toISOString().slice(0, 10),
+        index: true
     }
 }, { 
     collection: 'Statistics',

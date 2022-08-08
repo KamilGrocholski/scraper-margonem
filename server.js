@@ -11,6 +11,7 @@ import { deleteWorlds } from './controllers/worldController.js'
 import calcStats from './statistics/index.js'
 
 import dotenv from 'dotenv'
+import calcCharacters from './statistics/characters.js'
 dotenv.config()
 
 const app = express()
@@ -70,6 +71,9 @@ app.get('/:p/statistics/insert', async (req, res) => {
     }
 })
 
+app.get('/:p/items', async (req, res) => {
+    await calcCharacters()
+})
 
 const PORT = process.env.PORT || 80
 app.listen(PORT, () => console.log(`>>Działa na porcie: ${ PORT }`))

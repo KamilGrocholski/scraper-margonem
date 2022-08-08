@@ -70,6 +70,7 @@ const scraper = async (world) => {
     
                 for (let row = 1; row <= nRows; row++) {
                     console.log(`Row tabeli nr: ${row}`)
+
                     //Pobiera Nick z rekordu tabeli
                     const nick = await page.$eval(SELECTORS.NICK(row), nick => nick.textContent)
                     // console.log(nick)

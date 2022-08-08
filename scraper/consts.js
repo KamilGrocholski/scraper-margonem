@@ -43,5 +43,5 @@ export const SELECTORS = {
     },
     LAST_ONLINE: function(n) {
         return `body > div.background-logged-wrapper > div > div.body-container > div > div.light-brown-box.mb-4 > div > table > tbody > tr:nth-child(${n}) > td.long-last-online`
-    },    
+    }   
 }
