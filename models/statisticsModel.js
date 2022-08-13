@@ -32,7 +32,8 @@ const statisticsTotalSchema = new mongoose.Schema({
     ],
     creationTime: {
         type: Date,
-        default: (new Date()).toISOString().slice(0, 10),
+        // default: Date.now,
+        default: () => (new Date('2022-12-25')).toISOString().slice(0, 10),
         index: true
     }
 }, { 

@@ -9,7 +9,7 @@ import { SERVERS } from './consts.js'
 import { SELECTORS } from './consts.js'
 const TEST = {
     PAGINATION_LOOP: 1,
-    ROWS_LOOP: 15,
+    ROWS_LOOP: 25,
 }
 const testScraper = async (world) => {
 

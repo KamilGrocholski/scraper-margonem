@@ -4,14 +4,13 @@ import connect from './db/connection.js'
 
 import testScraper from './scraper/test.js'
 import scraper from './scraper/index.js'
-import { insertWorld } from './controllers/worldController.js'
-import { SERVERS } from './scraper/consts.js'
 
 import { deleteWorlds } from './controllers/worldController.js'
 import calcStats from './statistics/index.js'
 
 import dotenv from 'dotenv'
-import calcCharacters from './statistics/characters.js'
+import { calcRanks } from './controllers/rankController.js'
+
 dotenv.config()
 
 const app = express()
@@ -71,8 +70,16 @@ app.get('/:p/statistics/insert', async (req, res) => {
     }
 })
 
-app.get('/:p/items', async (req, res) => {
-    await calcCharacters()
+app.get('/:p/ranks/insert', async (req, res) => {
+    try {
+        if (req.params.p !== process.env.P) return res.status(401).send('nieprawidłowe P')
+        const response = await calcRanks()
+        console.log(response)
+        return res.status(200).send({ msg: 'Dobrze jest jest dobrze, dobrze robią' })
+    } catch (err) {
+        console.log(err)
+        return res.status(500).send(err)
+    }
 })
 
 const PORT = process.env.PORT || 80

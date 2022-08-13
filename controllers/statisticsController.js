@@ -18,6 +18,6 @@ export const insertStatistics = async (statistics) => {
     const totalTime = end - start
     console.log(totalTime)  
 
-    return { msg: 'Jest ok' }
+    return { msg: 'Jest ok', result }
 }
 

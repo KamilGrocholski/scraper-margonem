@@ -39,8 +39,7 @@ const calcStats = async () => {
     const calcSingleWorld = async (name) => {
 
         const worldData = await World
-            .find({ name })
-            .select('-_id -name -__v')    
+            .find({ name })   
 
         console.log(name)
         const worldMaxLvl = worldData[0].characters[0].lvl
