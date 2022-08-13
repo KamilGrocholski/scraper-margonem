@@ -45,37 +45,44 @@ export const calcRanks = async () => {
                 maxLvl: foundWorldTheLatest.maxLvl,
                 name: foundWorldTheLatest.name,
                 nCharacters: {
+                    n: foundWorldTheLatest.nCharacters,
                     gainFromLast: 0,
                     gainAvg: 0
                 },
                 nProfs: [
                         {
                             prof: 'Wojownik',
+                            n: foundWorldTheLatest.nW,
                             gainFromLast: 0,
                             gainAvg: 0
                         },
                         {
                             prof: 'Mag',
+                            n: foundWorldTheLatest.nM,
                             gainFromLast: 0,
                             gainAvg: 0
                         },
                         {
                             prof: 'Paladyn',
+                            n: foundWorldTheLatest.nP,
                             gainFromLast: 0,
                             gainAvg: 0
                         },
                         {
                             prof: 'Łowca',
+                            n: foundWorldTheLatest.nH,
                             gainFromLast: 0,
                             gainAvg: 0
                         },
                         {
                             prof: 'Tropiciel',
+                            n: foundWorldTheLatest.nT,
                             gainFromLast: 0,
                             gainAvg: 0
                         },
                         {
                             prof: 'Tancerz ostrzy',
+                            n: foundWorldTheLatest.nBd,
                             gainFromLast: 0,
                             gainAvg: 0
                         }
@@ -101,37 +108,44 @@ export const calcRanks = async () => {
                 maxLvl: foundWorldTheLatest.maxLvl,
                 name: foundWorldTheLatest.name,
                 nCharacters: {
+                    n: foundWorldTheLatest.nCharacters,
                     gainFromLast: foundWorldBefore.nCharacters - foundWorldTheLatest.nCharacters,
                     gainAvg: ((worldInRanks.nCharacters.gainAvg * nFoundRanks) + foundWorldBefore.nCharacters - foundWorldTheLatest.nCharacters) / (nFoundRanks + 1)
                 },
                 nProfs: [
                     {
                         prof: 'Wojownik',
+                        n: foundWorldTheLatest.nW,
                         gainFromLast: foundWorldTheLatest.nW - foundWorldBefore.nW ,
                         gainAvg: ((nProfs.nW.gainAvg * nFoundRanks) + foundWorldBefore.nW - foundWorldTheLatest.nW) / (nFoundRanks + 1)
                     },
                     {
                         prof: 'Mag',
+                        n: foundWorldTheLatest.nM,
                         gainFromLast: foundWorldTheLatest.nM - foundWorldBefore.nM ,
                         gainAvg: ((nProfs.nM.gainAvg * nFoundRanks) + foundWorldBefore.nM - foundWorldTheLatest.nM) / (nFoundRanks + 1)
                     },
                     {
                         prof: 'Paladyn',
+                        n: foundWorldTheLatest.nP,
                         gainFromLast: foundWorldTheLatest.nP - foundWorldBefore.nP ,
                         gainAvg: ((nProfs.nP.gainAvg * nFoundRanks) + foundWorldBefore.nP - foundWorldTheLatest.nP) / (nFoundRanks + 1)
                     },
                     {
                         prof: 'Łowca',
+                        n: foundWorldTheLatest.nH,
                         gainFromLast: foundWorldTheLatest.nH - foundWorldBefore.nH ,
                         gainAvg: ((nProfs.nH.gainAvg * nFoundRanks) + foundWorldBefore.nH - foundWorldTheLatest.nH) / (nFoundRanks + 1)
                     },
                     {
                         prof: 'Tropiciel',
+                        n: foundWorldTheLatest.nT,
                         gainFromLast: foundWorldTheLatest.nT - foundWorldBefore.nT ,
                         gainAvg: ((nProfs.nT.gainAvg * nFoundRanks) + foundWorldBefore.nT - foundWorldTheLatest.nT) / (nFoundRanks + 1)
                     },
                     {
                         prof: 'Tancerz ostrzy',
+                        n: foundWorldTheLatest.nBd,
                         gainFromLast: foundWorldTheLatest.nBd - foundWorldBefore.nBd ,
                         gainAvg: ((nProfs.nBd.gainAvg * nFoundRanks) + foundWorldBefore.nBd - foundWorldTheLatest.nBd) / (nFoundRanks + 1)
                     },

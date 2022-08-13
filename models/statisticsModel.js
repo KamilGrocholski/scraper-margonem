@@ -34,7 +34,8 @@ const statisticsTotalSchema = new mongoose.Schema({
         type: Date,
         // default: Date.now,
         default: () => (new Date()).toISOString().slice(0, 10),
-        index: true
+        index: true,
+        unique: true
     }
 }, { 
     collection: 'Statistics',

@@ -19,6 +19,10 @@ const ranksSchema = new mongoose.Schema({
                 required: true
             },
             nCharacters: {
+                n: {
+                    type: Number,
+                    required: true
+                },
                 gainFromLast: {
                     type: Number,
                     required: true,
@@ -33,6 +37,10 @@ const ranksSchema = new mongoose.Schema({
                     prof: {
                         type: String,
                         required: true,
+                    },
+                    n: {
+                        type: Number,
+                        required: true
                     },
                     gainFromLast: {
                         type: Number,
