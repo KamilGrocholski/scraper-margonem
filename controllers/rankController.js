@@ -29,8 +29,10 @@ export const calcRanks = async () => {
         worlds: []
     }
 
-    const nFoundRanks = await Ranks.find().estimatedDocumentCount()
-    // console.log(nFoundRanks)
+    const foundRanksDocs = await Ranks.find().estimatedDocumentCount()
+    console.log(`foundRanksDocs ${ foundRanksDocs }`)
+    const nFoundRanks = foundRanksDocs === 1 ? 1 : foundRanksDocs - 1
+    console.log(`nFoundRanks ${ nFoundRanks }`)
     const foundRanksTheLatest = await Ranks.findOne({ creationTime: beforeTimestamp })
     // console.log(foundRanksTheLatest)
 
@@ -109,45 +111,45 @@ export const calcRanks = async () => {
                 name: foundWorldTheLatest.name,
                 nCharacters: {
                     n: foundWorldTheLatest.nCharacters,
-                    gainFromLast: foundWorldBefore.nCharacters - foundWorldTheLatest.nCharacters,
-                    gainAvg: ((worldInRanks.nCharacters.gainAvg * nFoundRanks) + foundWorldBefore.nCharacters - foundWorldTheLatest.nCharacters) / (nFoundRanks)
+                    gainFromLast: foundWorldTheLatest.nCharacters - foundWorldBefore.nCharacters,
+                    gainAvg: foundRanksDocs === 1 ? foundWorldTheLatest.nCharacters - foundWorldBefore.nCharacters : (foundWorldTheLatest.nCharacters - foundWorldBefore.nCharacters + (worldInRanks.nCharacters.gainAvg * nFoundRanks) ) / (nFoundRanks)
                 },
                 nProfs: [
                     {
                         prof: 'Wojownik',
                         n: foundWorldTheLatest.nW,
                         gainFromLast: foundWorldTheLatest.nW - foundWorldBefore.nW ,
-                        gainAvg: ((nProfs.nW.gainAvg * nFoundRanks) + foundWorldBefore.nW - foundWorldTheLatest.nW) / (nFoundRanks )
+                        gainAvg: foundRanksDocs === 1 ? foundWorldTheLatest.nW - foundWorldBefore.nW : (foundWorldTheLatest.nW - (nProfs.nW.gainAvg * nFoundRanks) ) / (nFoundRanks)
                     },
                     {
                         prof: 'Mag',
                         n: foundWorldTheLatest.nM,
                         gainFromLast: foundWorldTheLatest.nM - foundWorldBefore.nM ,
-                        gainAvg: ((nProfs.nM.gainAvg * nFoundRanks) + foundWorldBefore.nM - foundWorldTheLatest.nM) / (nFoundRanks)
+                        gainAvg: foundRanksDocs === 1 ? foundWorldTheLatest.nM - foundWorldBefore.nM : (foundWorldTheLatest.nM - (nProfs.nM.gainAvg * nFoundRanks) ) / (nFoundRanks)
                     },
                     {
                         prof: 'Paladyn',
                         n: foundWorldTheLatest.nP,
                         gainFromLast: foundWorldTheLatest.nP - foundWorldBefore.nP ,
-                        gainAvg: ((nProfs.nP.gainAvg * nFoundRanks) + foundWorldBefore.nP - foundWorldTheLatest.nP) / (nFoundRanks)
+                        gainAvg: foundRanksDocs === 1 ? foundWorldTheLatest.nP - foundWorldBefore.nP : (foundWorldTheLatest.nP - (nProfs.nP.gainAvg * nFoundRanks) ) / (nFoundRanks)
                     },
                     {
                         prof: 'Łowca',
                         n: foundWorldTheLatest.nH,
                         gainFromLast: foundWorldTheLatest.nH - foundWorldBefore.nH ,
-                        gainAvg: ((nProfs.nH.gainAvg * nFoundRanks) + foundWorldBefore.nH - foundWorldTheLatest.nH) / (nFoundRanks)
+                        gainAvg: foundRanksDocs === 1 ? foundWorldTheLatest.nH - foundWorldBefore.nH : (foundWorldTheLatest.nH - (nProfs.nH.gainAvg * nFoundRanks) ) / (nFoundRanks)
                     },
                     {
                         prof: 'Tropiciel',
                         n: foundWorldTheLatest.nT,
                         gainFromLast: foundWorldTheLatest.nT - foundWorldBefore.nT ,
-                        gainAvg: ((nProfs.nT.gainAvg * nFoundRanks) + foundWorldBefore.nT - foundWorldTheLatest.nT) / (nFoundRanks)
+                        gainAvg: foundRanksDocs === 1 ? foundWorldTheLatest.nT - foundWorldBefore.nT : (foundWorldTheLatest.nT - (nProfs.nT.gainAvg * nFoundRanks) ) / (nFoundRanks)
                     },
                     {
                         prof: 'Tancerz ostrzy',
                         n: foundWorldTheLatest.nBd,
                         gainFromLast: foundWorldTheLatest.nBd - foundWorldBefore.nBd ,
-                        gainAvg: ((nProfs.nBd.gainAvg * nFoundRanks) + foundWorldBefore.nBd - foundWorldTheLatest.nBd) / (nFoundRanks)
+                        gainAvg: foundRanksDocs === 1 ? foundWorldTheLatest.nBd - foundWorldBefore.nBd : (foundWorldTheLatest.nBd - (nProfs.nBd.gainAvg * nFoundRanks) ) / (nFoundRanks)
                     },
                 ]
             }

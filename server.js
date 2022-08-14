@@ -82,6 +82,6 @@ app.get('/:p/ranks/insert', async (req, res) => {
     }
 })
 
-const PORT = process.env.PORT || 80
+const PORT = process.env.PORT || 4000
 app.listen(PORT, () => console.log(`>>Działa na porcie: ${ PORT }`))
 await connect(process.env.MONGO_URI)

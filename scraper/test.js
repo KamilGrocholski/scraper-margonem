@@ -9,7 +9,7 @@ import { SERVERS } from './consts.js'
 import { SELECTORS } from './consts.js'
 const TEST = {
     PAGINATION_LOOP: 1,
-    ROWS_LOOP: 25,
+    ROWS_LOOP: 50,
 }
 const testScraper = async (world) => {
 
@@ -27,7 +27,7 @@ const testScraper = async (world) => {
             '--no-first-run',
             "--incognito",
             '--no-zygote',
-            '--single-process', // <- this one doesn't works in Windows
+            '--single-process', // <- this one doesn't work in Windows
             '--disable-gpu'
         ],
     })
