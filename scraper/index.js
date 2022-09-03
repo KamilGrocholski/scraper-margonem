@@ -23,7 +23,7 @@ const scraper = async (world) => {
             '--no-first-run',
             '--no-zygote',
             "--incognito",
-            '--single-process', // <- this one doesn't works in Windows
+            '--single-process',
             '--disable-gpu'
         ]
     })

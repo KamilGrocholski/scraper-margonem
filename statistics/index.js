@@ -29,17 +29,23 @@ const calcStats = async () => {
         })
     }
 
+    //Tablica creationTimes w bazie danych
+    const creationTimesArray = await World // WIELKA ZMIANA UWAGA!!!! 30.09 przypomnienie
+        .find()
+        .select('creationTime')
+        .distinct('creationTime')
     //Tablica nazw światów w bazie danych
     const worldsInCollection = await World
         .find()
         .select('name')
+        .distinct('name')
 
     console.log(worldsInCollection)
 
     const calcSingleWorld = async (name) => {
 
         const worldData = await World
-            .find({ name })   
+            .find({ name, creationTime: creationTimesArray[creationTimesArray.length - 1] })   // WIELKA ZMIANA UWAGA!!!! 30.09 przypomnienie
 
         console.log(name)
         const worldMaxLvl = worldData[0].characters[0].lvl

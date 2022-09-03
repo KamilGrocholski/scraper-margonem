@@ -4,7 +4,6 @@ const worldSchema = new mongoose.Schema({
 	name: {
 		type: String,
 		required: true,
-		unique: true
 	},
 	characters: [
 		{
@@ -14,9 +13,15 @@ const worldSchema = new mongoose.Schema({
 			ph: Number,
 			lastOnline: String
 		}
-	]
+	],
+	creationTime: { //to zmieniłem UWAGA!!! a raczej dodałem
+		type: Date,
+		default: () => (new Date()).toISOString().slice(0, 10),
+		index: true
+	}
 }, { 
-	collection: 'Worlds'
+	collection: 'Worlds',
+	timestamps: true
 }
 )
 
