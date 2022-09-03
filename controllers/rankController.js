@@ -43,6 +43,8 @@ export const calcRanks = async () => {
         // console.log(foundWorldBefore)
         if (!foundWorldBefore) {
             console.log('Zaczynam if !foundWorldBefore')
+            console.log('foundWorldTheLatest: ')
+            console.log(foundWorldTheLatest)
             const world = {
                 maxLvl: foundWorldTheLatest.maxLvl,
                 name: foundWorldTheLatest.name,

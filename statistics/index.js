@@ -40,6 +40,7 @@ const calcStats = async () => {
         .select('name')
         .distinct('name')
 
+    console.log('Kolekcja światów')
     console.log(worldsInCollection)
 
     const calcSingleWorld = async (name) => {
@@ -48,6 +49,8 @@ const calcStats = async () => {
             .find({ name, creationTime: creationTimesArray[creationTimesArray.length - 1] })   // WIELKA ZMIANA UWAGA!!!! 30.09 przypomnienie
 
         console.log(name)
+        console.log('worldMaxLvl')
+        console.log(worldData[0].characters[0].lvl)
         const worldMaxLvl = worldData[0].characters[0].lvl
 
         if (worldMaxLvl > globalStatistics.maxLvl) globalStatistics.maxLvl = worldMaxLvl
@@ -106,7 +109,9 @@ const calcStats = async () => {
 
     //Iteracja dla każdego świata w tablicy nazw
     await Promise.all(worldsInCollection.map(async world => {
-        await calcSingleWorld(world.name)
+        console.log('calcSingleWorld: ' + world)
+        console.log(world)
+        await calcSingleWorld(world)
     }))
 
     // //Globalne staty, dopiero po policzeniu wszystkich światów
@@ -123,6 +128,7 @@ const calcStats = async () => {
         nBd: globalStatistics['Tancerz ostrzy']
     })
 
+    console.log('globalInsert: ')
     console.log(globalInsert)
 }
 
